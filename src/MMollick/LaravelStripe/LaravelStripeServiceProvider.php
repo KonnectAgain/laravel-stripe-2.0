@@ -18,8 +18,6 @@ class LaravelStripeServiceProvider extends ServiceProvider {
      */
     public function boot()
     {
-        $this->package('mmollick/laravel-stripe');
-
         /*
          * Load Stripe configuration
          *
@@ -28,15 +26,15 @@ class LaravelStripeServiceProvider extends ServiceProvider {
          *
          * Read more: http://laravel.com/docs/configuration#environment-configuration
          */
-        $api_key = isset($_ENV['stripe.api_key']) ? $_ENV['stripe.api_key'] : $this->app['config']->get('laravel-stripe::stripe.api_key');
+        $api_key = isset($_ENV['stripe.api_key']) ? $_ENV['stripe.api_key'] : $this->app['config']->get('services.stripe')['api_key'];
         \Stripe\Stripe::setApiKey($api_key);
 
         // Set API Version (optional)
-        $api_version = isset($_ENV['stripe.api_version']) ? $_ENV['stripe.api_version'] : $this->app['config']->get('laravel-stripe::stripe.api_version');
+        $api_version = isset($_ENV['stripe.api_version']) ? $_ENV['stripe.api_version'] : $this->app['config']->get('services.stripe')['api_version'];
         if($api_version !== null)
             \Stripe\Stripe::setApiVersion($api_version);
 
-        $publishableKey = isset($_ENV['stripe.publishable_key']) ? $_ENV['stripe.publishable_key'] : $this->app['config']->get('laravel-stripe::stripe.publishable_key');
+        $publishableKey = isset($_ENV['stripe.publishable_key']) ? $_ENV['stripe.publishable_key'] : $this->app['config']->get('services.stripe')['publishable_key'];
 
         /*
          * Register blade compiler for the Stripe publishable key.

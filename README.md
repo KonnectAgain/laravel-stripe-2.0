@@ -1,4 +1,4 @@
-Stripe 2.0 for Laravel 4
+Stripe 2.0 for Laravel 5
 ==============
 
 Integrates the Stripe PHP library with Laravel 4 via a ServiceProvider, config, and Blade extensions.
